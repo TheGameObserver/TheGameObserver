@@ -1,10 +1,10 @@
-import Link from "@/components/Link";
-import Tag from "@/components/Tag";
-import siteMetadata from "@/data/siteMetadata";
-import { formatDate } from "pliny/utils/formatDate";
-import NewsletterForm from "pliny/ui/NewsletterForm";
+import Link from '@/components/Link'
+import Tag from '@/components/Tag'
+import siteMetadata from '@/data/siteMetadata'
+import { formatDate } from 'pliny/utils/formatDate'
+import NewsletterForm from 'pliny/ui/NewsletterForm'
 
-const MAX_DISPLAY = 5;
+const MAX_DISPLAY = 5
 
 export default function Home({ posts }) {
   return (
@@ -18,17 +18,17 @@ export default function Home({ posts }) {
             {siteMetadata.description}
           </p>
         </div>
-        <div className="mb-12 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="mb-12 overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700">
           <div className="p-8">
-            <p className="font-semibold text-sm uppercase tracking-widest text-blue-600">
+            <p className="text-sm font-semibold tracking-widest text-blue-600 uppercase">
               Featured Analysis
             </p>
 
             <h2 className="mt-3 text-4xl font-bold">Mexico 3–2 South Africa</h2>
 
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-              How one curved blind-side run and a midfield turnover created the
-              first goal of the FIFA World Cup 2026.
+              How one curved blind-side run and a midfield turnover created the first goal of the
+              FIFA World Cup 2026.
             </p>
 
             <div className="mt-6">
@@ -42,9 +42,9 @@ export default function Home({ posts }) {
           </div>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && "No posts found."}
+          {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags } = post;
+            const { slug, date, title, summary, tags } = post
             return (
               <li key={slug} className="py-12">
                 <article>
@@ -52,9 +52,7 @@ export default function Home({ posts }) {
                     <dl>
                       <dt className="sr-only">Published on</dt>
                       <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>
-                          {formatDate(date, siteMetadata.locale)}
-                        </time>
+                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                       </dd>
                     </dl>
                     <div className="space-y-5 xl:col-span-3">
@@ -91,7 +89,7 @@ export default function Home({ posts }) {
                   </div>
                 </article>
               </li>
-            );
+            )
           })}
         </ul>
       </div>
@@ -112,5 +110,5 @@ export default function Home({ posts }) {
         </div>
       )}
     </>
-  );
+  )
 }
