@@ -18,6 +18,31 @@ export default function Home({ posts }) {
             {siteMetadata.description}
           </p>
         </div>
+        <div className="mb-12 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+  <div className="p-8">
+    <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+      Featured Analysis
+    </p>
+
+    <h2 className="mt-3 text-4xl font-bold">
+      Mexico 3–2 South Africa
+    </h2>
+
+    <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+      How one curved blind-side run and a midfield turnover created the first goal
+      of the FIFA World Cup 2026.
+    </p>
+
+    <div className="mt-6">
+      <Link
+        href="/blog/mexico-vs-south-africa-blind-side-run"
+        className="text-blue-600 font-semibold hover:underline"
+      >
+        Read Full Analysis →
+      </Link>
+    </div>
+  </div>
+</div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
