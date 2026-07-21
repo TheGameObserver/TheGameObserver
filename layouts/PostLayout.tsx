@@ -7,22 +7,42 @@ import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import ArticleHero from '@/components/article/ArticleHero'
+import ArticleSidebar from '@/components/article/ArticleSidebar'
+import AuthorBio from '@/components/article/AuthorBio'
+import RelatedArticles from '@/components/article/RelatedArticles'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
+
+interface TocHeading {
+  value: string
+  url: string
+  depth: number
+}
 
 interface LayoutProps {
   content: CoreContent<Blog>
   authorDetails: CoreContent<Authors>[]
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
+  toc?: TocHeading[]
+  relatedPosts?: CoreContent<Blog>[]
   children: ReactNode
 }
 
-export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path } = content
+export default function PostLayout({
+  content,
+  authorDetails,
+  next,
+  prev,
+  toc = [],
+  relatedPosts = [],
+  children,
+}: LayoutProps) {
+  const { filePath, path, slug } = content
   const basePath = path.split('/')[0]
+  const shareUrl = `${siteMetadata.siteUrl}/${path}`
 
   return (
     <SectionContainer>
@@ -30,22 +50,32 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
       <article>
         <ArticleHero content={content} authorDetails={authorDetails} />
 
-        <div className="mx-auto max-w-3xl">
-          <div className="prose dark:prose-invert pt-6 pb-8">{children}</div>
+        <div className="mx-auto max-w-5xl xl:grid xl:grid-cols-[42rem_220px] xl:justify-center xl:gap-16">
+          <div className="mx-auto max-w-3xl xl:mx-0 xl:max-w-none">
+            <div className="prose dark:prose-invert pt-6 pb-8">{children}</div>
 
-          <div className="border-t border-gray-200 pt-6 pb-6 text-sm text-gray-700 dark:border-gray-700 dark:text-gray-300">
-            <Link href={discussUrl(path)} rel="nofollow">
-              Discuss on Twitter
-            </Link>
-            {` • `}
-            <Link href={editUrl(filePath)}>View on GitHub</Link>
+            <div className="border-t border-gray-200 pt-6 pb-6 text-sm text-gray-700 dark:border-gray-700 dark:text-gray-300">
+              <Link href={discussUrl(path)} rel="nofollow">
+                Discuss on Twitter
+              </Link>
+              {` • `}
+              <Link href={editUrl(filePath)}>View on GitHub</Link>
+            </div>
+
+            {siteMetadata.comments && (
+              <div className="pt-6 pb-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+                <Comments slug={slug} />
+              </div>
+            )}
+
+            <AuthorBio authorDetails={authorDetails} />
           </div>
 
-          {siteMetadata.comments && (
-            <div className="pt-6 pb-6 text-center text-gray-700 dark:text-gray-300" id="comment">
-              <Comments slug={content.slug} />
-            </div>
-          )}
+          <ArticleSidebar toc={toc} shareUrl={shareUrl} shareTitle={content.title} />
+        </div>
+
+        <div className="mx-auto max-w-5xl">
+          <RelatedArticles posts={relatedPosts} />
 
           <footer>
             {(next || prev) && (

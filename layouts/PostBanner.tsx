@@ -7,6 +7,8 @@ import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import ArticleHero from '@/components/article/ArticleHero'
+import AuthorBio from '@/components/article/AuthorBio'
+import RelatedArticles from '@/components/article/RelatedArticles'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -14,6 +16,7 @@ interface LayoutProps {
   children: ReactNode
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
+  relatedPosts?: CoreContent<Blog>[]
 }
 
 export default function PostMinimal({
@@ -21,6 +24,7 @@ export default function PostMinimal({
   authorDetails = [],
   next,
   prev,
+  relatedPosts = [],
   children,
 }: LayoutProps) {
   const { slug } = content
@@ -40,6 +44,14 @@ export default function PostMinimal({
             </div>
           )}
 
+          <AuthorBio authorDetails={authorDetails} />
+        </div>
+
+        <div className="mx-auto max-w-5xl">
+          <RelatedArticles posts={relatedPosts} />
+        </div>
+
+        <div className="mx-auto max-w-3xl">
           <footer>
             <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
               {prev && prev.path && (
