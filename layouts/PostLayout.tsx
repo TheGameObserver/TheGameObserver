@@ -7,6 +7,7 @@ import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import ArticleHero from '@/components/article/ArticleHero'
+import FootballMetadata from '@/components/article/FootballMetadata'
 import ArticleSidebar from '@/components/article/ArticleSidebar'
 import AuthorBio from '@/components/article/AuthorBio'
 import RelatedArticles from '@/components/article/RelatedArticles'
@@ -49,6 +50,10 @@ export default function PostLayout({
       <ScrollTopAndComment />
       <article>
         <ArticleHero content={content} authorDetails={authorDetails} />
+
+        <div className="mb-8">
+          <FootballMetadata data={content} />
+        </div>
 
         <div className="mx-auto max-w-5xl xl:grid xl:grid-cols-[42rem_220px] xl:justify-center xl:gap-16">
           <div className="mx-auto max-w-3xl xl:mx-0 xl:max-w-none">
