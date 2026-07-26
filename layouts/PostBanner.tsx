@@ -7,6 +7,7 @@ import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import ArticleHero from '@/components/article/ArticleHero'
+import FootballMetadata from '@/components/article/FootballMetadata'
 import AuthorBio from '@/components/article/AuthorBio'
 import RelatedArticles from '@/components/article/RelatedArticles'
 
@@ -19,7 +20,7 @@ interface LayoutProps {
   relatedPosts?: CoreContent<Blog>[]
 }
 
-export default function PostMinimal({
+export default function PostBanner({
   content,
   authorDetails = [],
   next,
@@ -34,6 +35,10 @@ export default function PostMinimal({
       <ScrollTopAndComment />
       <article>
         <ArticleHero content={content} authorDetails={authorDetails} />
+
+        <div className="mb-8">
+          <FootballMetadata data={content} />
+        </div>
 
         <div className="mx-auto max-w-3xl">
           <div className="prose dark:prose-invert py-4">{children}</div>
