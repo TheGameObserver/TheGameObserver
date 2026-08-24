@@ -4,6 +4,9 @@
 // Match pages, which may assemble this data from sources other than a blog
 // post (e.g. a future CMS collection).
 
+import Link from 'next/link'
+import { slug } from 'github-slugger'
+
 export interface FootballMetadataFields {
   competition?: string
   season?: string
@@ -28,55 +31,99 @@ interface MetadataCard {
   content: React.ReactNode
 }
 
-const PillList = ({ items }: { items: string[] }) => (
+const linkClass =
+  'text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+
+const PillList = ({ items, hrefPrefix }: { items: string[]; hrefPrefix: string }) => (
   <div className="mt-1 flex flex-wrap gap-1.5">
     {items.map((item) => (
-      <span
+      <Link
         key={item}
-        className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+        href={`${hrefPrefix}/${slug(item)}`}
+        className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
       >
         {item}
-      </span>
+      </Link>
     ))}
   </div>
+)
+
+const MatchTeams = ({ homeTeam, awayTeam }: { homeTeam?: string; awayTeam?: string }) => (
+  <span>
+    {homeTeam && (
+      <Link href={`/teams/${slug(homeTeam)}`} className={linkClass}>
+        {homeTeam}
+      </Link>
+    )}
+
+    {homeTeam && awayTeam && ' vs '}
+
+    {awayTeam && (
+      <Link href={`/teams/${slug(awayTeam)}`} className={linkClass}>
+        {awayTeam}
+      </Link>
+    )}
+  </span>
 )
 
 const buildCards = (data: FootballMetadataFields): MetadataCard[] => {
   const cards: MetadataCard[] = []
 
   if (data.competition) {
-    cards.push({ label: 'Competition', content: data.competition })
+    cards.push({
+      label: 'Competition',
+      content: (
+        <Link href={`/competitions/${slug(data.competition)}`} className={linkClass}>
+          {data.competition}
+        </Link>
+      ),
+    })
   }
+
   if (data.season) {
     cards.push({ label: 'Season', content: data.season })
   }
+
   if (data.stage) {
     cards.push({ label: 'Stage', content: data.stage })
   }
+
   if (data.homeTeam || data.awayTeam) {
     cards.push({
       label: 'Match',
-      content: [data.homeTeam, data.awayTeam].filter(Boolean).join(' vs '),
+      content: <MatchTeams homeTeam={data.homeTeam} awayTeam={data.awayTeam} />,
     })
   }
+
   if (data.score) {
     cards.push({ label: 'Score', content: data.score })
   }
+
   if (data.formations) {
     cards.push({ label: 'Formations', content: data.formations })
   }
+
   if (data.managerHome || data.managerAway) {
     cards.push({
       label: 'Managers',
       content: [data.managerHome, data.managerAway].filter(Boolean).join(' vs '),
     })
   }
+
   if (data.players && data.players.length > 0) {
-    cards.push({ label: 'Players', content: <PillList items={data.players} /> })
+    cards.push({
+      label: 'Players',
+      content: <PillList items={data.players} hrefPrefix="/players" />,
+    })
   }
+
   if (data.tacticalTopics && data.tacticalTopics.length > 0) {
-    cards.push({ label: 'Tactical Topics', content: <PillList items={data.tacticalTopics} /> })
+    cards.push({
+      label: 'Tactical Topics',
+      content: <PillList items={data.tacticalTopics} hrefPrefix="/tactical-topics" />,
+    })
   }
+
   if (data.analysisType) {
     cards.push({ label: 'Analysis Type', content: data.analysisType })
   }
