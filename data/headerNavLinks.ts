@@ -1,7 +1,10 @@
 const headerNavLinks = [
   { href: '/', title: 'Home' },
   { href: '/blog', title: 'Analysis' },
-  { href: '/tags', title: 'Competitions' },
+  { href: '/competitions', title: 'Competitions' },
+  { href: '/teams', title: 'Teams' },
+  { href: '/players', title: 'Players' },
+  { href: '/tactical-topics', title: 'Tactical Topics' },
   { href: '/about', title: 'About' },
 ]
 
