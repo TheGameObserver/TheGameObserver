@@ -13,10 +13,6 @@ import ArticleSidebar from '@/components/article/ArticleSidebar'
 import AuthorBio from '@/components/article/AuthorBio'
 import RelatedArticles from '@/components/article/RelatedArticles'
 
-const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
-const discussUrl = (path) =>
-  `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
-
 interface TocHeading {
   value: string
   url: string
@@ -42,7 +38,7 @@ export default function PostLayout({
   relatedPosts = [],
   children,
 }: LayoutProps) {
-  const { filePath, path, slug } = content
+  const { path, slug } = content
   const basePath = path.split('/')[0]
   const shareUrl = `${siteMetadata.siteUrl}/${path}`
 
@@ -61,14 +57,6 @@ export default function PostLayout({
         <div className="mx-auto max-w-5xl xl:grid xl:grid-cols-[42rem_220px] xl:justify-center xl:gap-16">
           <div className="mx-auto max-w-3xl xl:mx-0 xl:max-w-none">
             <div className="prose dark:prose-invert pt-6 pb-8">{children}</div>
-
-            <div className="border-t border-gray-200 pt-6 pb-6 text-sm text-gray-700 dark:border-gray-700 dark:text-gray-300">
-              <Link href={discussUrl(path)} rel="nofollow">
-                Discuss on Twitter
-              </Link>
-              {` • `}
-              <Link href={editUrl(filePath)}>View on GitHub</Link>
-            </div>
 
             {siteMetadata.comments && (
               <div className="pt-6 pb-6 text-center text-gray-700 dark:text-gray-300" id="comment">
@@ -114,9 +102,9 @@ export default function PostLayout({
               <Link
                 href={`/${basePath}`}
                 className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                aria-label="Back to the blog"
+                aria-label="Back to Analysis"
               >
-                &larr; Back to the blog
+                &larr; Back to Analysis
               </Link>
             </div>
           </footer>

@@ -14,24 +14,13 @@ interface FeaturedArticleProps {
   post: FeaturedPost | null
 }
 
-// TEMPORARY fallback content, used only when no article in /data/blog has
-// `featured: true` in its frontmatter. Once a real article is marked as
-// featured, this fallback is never rendered and can be safely removed.
-const TEMP_FALLBACK: FeaturedPost = {
-  slug: '',
-  title: 'Mexico 3–2 South Africa',
-  summary:
-    'How one curved blind-side run and a midfield turnover created the first goal of the FIFA World Cup 2026.',
-  images: [],
-  tags: ['Match Analysis'],
-}
-
 const FeaturedArticle = ({ post }: FeaturedArticleProps) => {
-  const article = post ?? TEMP_FALLBACK
-  const isTemporary = !post
-  const href = isTemporary ? '/blog' : `/blog/${article.slug}`
-  const image = article.images?.[0] || siteMetadata.socialBanner
-  const badge = article.tags?.[0] || 'Analysis'
+  // No featured article selected yet (no published content) — render nothing.
+  if (!post) return null
+
+  const href = `/blog/${post.slug}`
+  const image = post.images?.[0] || siteMetadata.socialBanner
+  const badge = post.tags?.[0] || 'Analysis'
 
   return (
     <div id="featured-analysis" className="pb-12">
@@ -39,9 +28,9 @@ const FeaturedArticle = ({ post }: FeaturedArticleProps) => {
         Featured Analysis
       </p>
       <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-sm dark:border-gray-700">
-        <Link href={href} aria-label={`Read: ${article.title}`}>
+        <Link href={href} aria-label={`Read: ${post.title}`}>
           <Image
-            alt={article.title}
+            alt={post.title}
             src={image}
             width={1200}
             height={630}
@@ -54,19 +43,19 @@ const FeaturedArticle = ({ post }: FeaturedArticleProps) => {
           </span>
           <h2 className="mt-3 text-2xl leading-8 font-bold tracking-tight text-gray-900 sm:text-3xl sm:leading-9 dark:text-gray-100">
             <Link href={href} className="hover:text-primary-600 dark:hover:text-primary-400">
-              {article.title}
+              {post.title}
             </Link>
           </h2>
-          {article.summary && (
+          {post.summary && (
             <p className="mt-4 text-base leading-7 text-gray-500 sm:text-lg dark:text-gray-400">
-              {article.summary}
+              {post.summary}
             </p>
           )}
           <div className="mt-6">
             <Link
               href={href}
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 text-base leading-6 font-semibold"
-              aria-label={`Read full analysis: ${article.title}`}
+              aria-label={`Read full analysis: ${post.title}`}
             >
               Read Full Analysis &rarr;
             </Link>

@@ -2,37 +2,36 @@ export interface Category {
   title: string
   description: string
   href: string
-  icon: 'match' | 'player' | 'tactical' | 'coaching'
+  icon: 'trophy' | 'shield' | 'player' | 'tactical'
 }
 
-// NOTE: These link to the existing /tags/[tag] routes so no new routing is
-// introduced. Once a dedicated "category" taxonomy exists in the CMS, these
-// hrefs can be swapped to point at real category pages without changing the
-// component that renders them.
+// Discovery cards for the homepage "Explore Football" section. Each card links
+// to an existing FootballMetadata taxonomy route (competitions, teams, players
+// and tactical topics) derived from article frontmatter — no new taxonomy.
 const categoriesData: Category[] = [
   {
-    title: 'Match Analysis',
-    description: 'In-depth breakdowns of key matches, moments and turning points.',
-    href: '/tags/match-analysis',
-    icon: 'match',
+    title: 'Competitions',
+    description: 'Analysis organised by competition, from World Cup nights to league campaigns.',
+    href: '/competitions',
+    icon: 'trophy',
   },
   {
-    title: 'Player Analysis',
-    description: 'Individual performance, role and technique under the microscope.',
-    href: '/tags/player-analysis',
+    title: 'Teams',
+    description: 'How teams are built, how they play and what their matches reveal.',
+    href: '/teams',
+    icon: 'shield',
+  },
+  {
+    title: 'Players',
+    description: 'Individual performances, roles and the details behind key moments.',
+    href: '/players',
     icon: 'player',
   },
   {
-    title: 'Tactical Analysis',
-    description: 'Formations, systems and the ideas that shape how teams play.',
-    href: '/tags/tactical-analysis',
+    title: 'Tactical Topics',
+    description: 'The concepts that shape the modern game, from pressing to rest defence.',
+    href: '/tactical-topics',
     icon: 'tactical',
-  },
-  {
-    title: 'Coaching Corner',
-    description: 'Practical coaching perspectives for developing players and teams.',
-    href: '/tags/coaching-corner',
-    icon: 'coaching',
   },
 ]
 

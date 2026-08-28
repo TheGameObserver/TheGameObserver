@@ -2,29 +2,53 @@ import Link from '@/components/Link'
 import type { Category } from '@/data/categoriesData'
 
 const icons: Record<Category['icon'], React.ReactNode> = {
-  match: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 7.5l3 2.2-1.15 3.55h-3.7L9 9.7 12 7.5Z" />
-      <path d="M12 3v4.5M4.5 9.5l2.4 1M19.5 9.5l-2.4 1M8.8 20l1-3.25M15.2 20l-1-3.25" />
+  trophy: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="h-6 w-6"
+    >
+      <path d="M8 4.5h8V9a4 4 0 0 1-8 0V4.5Z" />
+      <path d="M8 6H5.5c0 2.2 1.1 3.9 2.8 4.4M16 6h2.5c0 2.2-1.1 3.9-2.8 4.4" />
+      <path d="M12 13v3.5M8.5 20h7M9.5 16.5h5l-.5 3.5h-4l-.5-3.5Z" />
     </svg>
   ),
   player: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="h-6 w-6"
+    >
       <circle cx="12" cy="7" r="3" />
       <path d="M5.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" />
     </svg>
   ),
   tactical: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="h-6 w-6"
+    >
       <rect x="3.5" y="4.5" width="17" height="12" rx="1.5" />
       <path d="M7 20h10M9 8.5l3 3 5-5M8 16.5h8" />
     </svg>
   ),
-  coaching: (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
-      <path d="M4.5 5.5h11a2 2 0 0 1 2 2V15a2 2 0 0 1-2 2H9l-4 3v-3H4.5a2 2 0 0 1-2-2V7.5a2 2 0 0 1 2-2Z" />
-      <path d="M8 9.5h6M8 12.5h4" />
+  shield: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="h-6 w-6"
+    >
+      <path d="M12 3.5 19 6v5.5c0 4.3-2.9 7.4-7 9-4.1-1.6-7-4.7-7-9V6l7-2.5Z" />
+      <circle cx="12" cy="11" r="2.5" />
     </svg>
   ),
 }

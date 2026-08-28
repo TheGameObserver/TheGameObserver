@@ -40,9 +40,9 @@ export default function Home({ posts, featuredPost }: HomeProps) {
             <Link
               href="/blog"
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              aria-label="All posts"
+              aria-label="All analysis"
             >
-              All Posts &rarr;
+              All Analysis &rarr;
             </Link>
           </div>
         )}
