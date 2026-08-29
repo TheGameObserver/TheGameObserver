@@ -16,8 +16,7 @@ export function getRelatedPosts(
     .filter((post) => post.slug !== currentPost.slug)
     .map((post) => {
       const sharedTags = (post.tags || []).filter((tag) => currentTags.has(tag)).length
-      const sameCategory =
-        currentPost.category && post.category === currentPost.category ? 1 : 0
+      const sameCategory = currentPost.category && post.category === currentPost.category ? 1 : 0
       return { post, score: sharedTags * 2 + sameCategory }
     })
     .filter(({ score }) => score > 0)

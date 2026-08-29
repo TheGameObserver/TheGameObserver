@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'A professional global football analysis publication focused on tactical, technical and analytical insight.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
+  siteUrl: 'https://thegameobserver.in',
   siteRepo: 'https://github.com/TheGameObserver/TheGameObserver',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
@@ -26,7 +26,7 @@ const siteMetadata = {
       // Remember to add 'us.umami.is' in `next.config.js` as a permitted domain for the CSP
     },
     // plausibleAnalytics: {
-    //   plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
+    //   plausibleDataDomain: '', // e.g. thegameobserver.in
     // If you are hosting your own Plausible.
     //   src: '', // e.g. https://plausible.my-domain.com/js/script.js
     // },
@@ -38,41 +38,24 @@ const siteMetadata = {
     //   googleAnalyticsId: '', // e.g. G-XXXXXXX
     // },
   },
+  // Newsletter intentionally disabled for V1 — no BUTTONDOWN_API_KEY is configured
+  // and submissions would fail. The existing conditional in app/Main.tsx hides the
+  // newsletter form while no provider is set. To enable later: add
+  // `provider: 'buttondown'` back and provide BUTTONDOWN_API_KEY.
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus, beehive
-    // Please add your .env file and modify it according to your selection
-    provider: 'buttondown',
   },
-  comments: {
-    // If you want to use an analytics provider you have to add it to the
-    // content security policy in the `next.config.js` file.
-    // Select a provider and use the environment variables associated to it
-    // https://vercel.com/docs/environment-variables
-    provider: 'giscus', // supported providers: giscus, utterances, disqus
-    giscusConfig: {
-      // Visit the link below, and follow the steps in the 'configuration' section
-      // https://giscus.app/
-      repo: process.env.NEXT_PUBLIC_GISCUS_REPO,
-      repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
-      category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
-      categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
-      mapping: 'pathname', // supported options: pathname, url, title
-      reactions: '1', // Emoji reactions: 1 = enable / 0 = disable
-      // Send discussion metadata periodically to the parent window: 1 = enable / 0 = disable
-      metadata: '0',
-      // theme example: light, dark, dark_dimmed, dark_high_contrast
-      // transparent_dark, preferred_color_scheme, custom
-      theme: 'light',
-      // theme when dark mode
-      darkTheme: 'transparent_dark',
-      // If the theme option above is set to 'custom`
-      // please provide a link below to your custom theme css file.
-      // example: https://giscus.app/themes/custom_example.css
-      themeURL: '',
-      // This corresponds to the `data-lang="en"` in giscus's configurations
-      lang: 'en',
-    },
-  },
+  // Comments intentionally disabled for V1 — Giscus environment variables are not
+  // configured, so the widget would render with an invalid configuration. The
+  // truthiness guards in layouts (PostLayout/PostSimple/PostBanner) and components
+  // (Comments/ScrollTopAndComment) skip the comment section while this object is
+  // absent. To enable later: restore this object with provider 'giscus' and set
+  // NEXT_PUBLIC_GISCUS_REPO, NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
+  // NEXT_PUBLIC_GISCUS_CATEGORY and NEXT_PUBLIC_GISCUS_CATEGORY_ID.
+  // giscusConfig reference:
+  //   repo / repositoryId / category / categoryId from https://giscus.app/
+  //   mapping: 'pathname', reactions: '1', metadata: '0', theme: 'light',
+  //   darkTheme: 'transparent_dark', themeURL: '', lang: 'en'
   search: {
     provider: 'kbar', // kbar or algolia
     kbarConfig: {
