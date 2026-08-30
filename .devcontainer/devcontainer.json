@@ -8,9 +8,7 @@
   "postCreateCommand": "",
   "postAttachCommand": "yarn dev",
   "customizations": {
-    "codespaces": {
-      "openFiles": ["data/blog/code-sample.mdx"]
-    },
+    "codespaces": {},
     "vscode": {
       "settings": {
         "editor.formatOnSave": true
