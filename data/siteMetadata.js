@@ -3,12 +3,12 @@ const siteMetadata = {
   title: 'The Game Observer',
   author: 'The Game Observer',
   headerTitle: 'The Game Observer',
-  description: 'A professional global football analysis publication focused on tactical, technical and analytical insight.',
+  description:
+    'A professional global football analysis publication focused on tactical, technical and analytical insight.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://thegameobserver.in',
   siteRepo: 'https://github.com/TheGameObserver/TheGameObserver',
-  siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   // Social profiles intentionally omitted until official accounts exist.
   locale: 'en-US',
