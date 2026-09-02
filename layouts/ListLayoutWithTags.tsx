@@ -124,6 +124,9 @@ export default function ListLayoutWithTags({
             </div>
           </div>
           <div>
+            {displayPosts.length === 0 && (
+              <p className="py-8 text-gray-500 dark:text-gray-400">No analysis found.</p>
+            )}
             <ul>
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags } = post

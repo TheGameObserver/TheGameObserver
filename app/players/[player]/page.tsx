@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { allBlogs } from 'contentlayer/generated'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import { slug } from 'github-slugger'
 
 const normalizePlayer = (name: string) =>
@@ -20,7 +22,7 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
 
   const decodedPlayer = decodeURIComponent(player)
 
-  const posts = allBlogs.filter((post) =>
+  const posts = allCoreContent(sortPosts(allBlogs)).filter((post) =>
     (post.players || []).some(
       (name) =>
         slug(name) === slug(decodedPlayer) ||
@@ -56,6 +58,14 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <div className="mb-10">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Players', href: '/players' },
+            { label: playerName },
+          ]}
+          className="mb-6"
+        />
         <p className="text-primary-500 text-sm font-semibold tracking-widest uppercase">Player</p>
 
         <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl dark:text-white">

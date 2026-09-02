@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { allBlogs } from 'contentlayer/generated'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import { slug } from 'github-slugger'
 
 interface CompetitionPageProps {
@@ -11,7 +13,7 @@ interface CompetitionPageProps {
 export default async function CompetitionPage({ params }: CompetitionPageProps) {
   const { competition } = await params
 
-  const posts = allBlogs.filter(
+  const posts = allCoreContent(sortPosts(allBlogs)).filter(
     (post) => post.competition && slug(post.competition) === competition
   )
 
@@ -34,11 +36,21 @@ export default async function CompetitionPage({ params }: CompetitionPageProps) 
     )
   }
 
-  const competitionName = posts[0].competition
+  // The filter above guarantees every matching post has a competition, so the
+  // display name is always defined.
+  const competitionName = posts[0].competition as string
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <div className="mb-10">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Competitions', href: '/competitions' },
+            { label: competitionName },
+          ]}
+          className="mb-6"
+        />
         <p className="text-primary-500 text-sm font-semibold tracking-widest uppercase">
           Competition
         </p>

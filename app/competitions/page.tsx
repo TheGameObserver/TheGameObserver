@@ -1,11 +1,12 @@
 import Link from '@/components/Link'
 import { allBlogs } from 'contentlayer/generated'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { slug } from 'github-slugger'
 
 export default function CompetitionsPage() {
   const competitions = Array.from(
     new Set(
-      allBlogs
+      allCoreContent(sortPosts(allBlogs))
         .map((post) => post.competition)
         .filter((competition): competition is string => Boolean(competition))
     )

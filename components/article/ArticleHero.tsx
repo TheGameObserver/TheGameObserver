@@ -5,6 +5,7 @@ import Image from '@/components/Image'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import PageTitle from '@/components/PageTitle'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import siteMetadata from '@/data/siteMetadata'
 
 interface ArticleHeroProps {
@@ -20,8 +21,15 @@ const ArticleHero = ({ content, authorDetails }: ArticleHeroProps) => {
   // first tag so older/undated content still shows a sensible badge.
   const badge = category || tags?.[0]
 
+  const breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'Analysis', href: '/blog' },
+    { label: title },
+  ]
+
   return (
     <header className="pt-6 pb-8">
+      <Breadcrumbs items={breadcrumbs} className="mb-6" />
       <div className="mb-8 overflow-hidden rounded-2xl">
         <Image
           src={coverImage}

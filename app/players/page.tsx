@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import { allBlogs } from 'contentlayer/generated'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { slug } from 'github-slugger'
 
 export default function PlayersPage() {
   const players = Array.from(
     new Set(
-      allBlogs
+      allCoreContent(sortPosts(allBlogs))
         .flatMap((post) => post.players || [])
         .filter((player): player is string => Boolean(player))
     )

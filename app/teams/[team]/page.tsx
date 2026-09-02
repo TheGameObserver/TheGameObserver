@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { allBlogs } from 'contentlayer/generated'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import { slug } from 'github-slugger'
 
 interface TeamPageProps {
@@ -11,7 +13,7 @@ interface TeamPageProps {
 export default async function TeamPage({ params }: TeamPageProps) {
   const { team } = await params
 
-  const posts = allBlogs.filter(
+  const posts = allCoreContent(sortPosts(allBlogs)).filter(
     (post) =>
       (post.homeTeam && slug(post.homeTeam) === team) ||
       (post.awayTeam && slug(post.awayTeam) === team)
@@ -35,12 +37,23 @@ export default async function TeamPage({ params }: TeamPageProps) {
     )
   }
 
-  const teamName =
+  // The filter above guarantees a match on home or away team, so the display
+  // name is always defined.
+  const teamName = (
     posts[0].homeTeam && slug(posts[0].homeTeam) === team ? posts[0].homeTeam : posts[0].awayTeam
+  ) as string
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <div className="mb-10">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Teams', href: '/teams' },
+            { label: teamName },
+          ]}
+          className="mb-6"
+        />
         <p className="text-primary-500 text-sm font-semibold tracking-widest uppercase">Team</p>
 
         <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl dark:text-white">

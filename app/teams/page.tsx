@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import { allBlogs } from 'contentlayer/generated'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { slug } from 'github-slugger'
 
 export default function TeamsPage() {
   const teams = Array.from(
     new Set(
-      allBlogs
+      allCoreContent(sortPosts(allBlogs))
         .flatMap((post) => [post.homeTeam, post.awayTeam])
         .filter((team): team is string => Boolean(team))
     )

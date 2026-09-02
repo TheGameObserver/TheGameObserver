@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { allBlogs } from 'contentlayer/generated'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import { slug } from 'github-slugger'
 
 interface TacticalTopicPageProps {
@@ -20,7 +22,7 @@ export default async function TacticalTopicPage({ params }: TacticalTopicPagePro
 
   const decodedTopic = decodeURIComponent(topic)
 
-  const posts = allBlogs.filter((post) =>
+  const posts = allCoreContent(sortPosts(allBlogs)).filter((post) =>
     (post.tacticalTopics || []).some(
       (name) =>
         slug(name) === slug(decodedTopic) || normalizeTopic(name) === normalizeTopic(decodedTopic)
@@ -59,6 +61,14 @@ export default async function TacticalTopicPage({ params }: TacticalTopicPagePro
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <div className="mb-10">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Tactical Topics', href: '/tactical-topics' },
+            { label: topicName },
+          ]}
+          className="mb-6"
+        />
         <p className="text-primary-500 text-sm font-semibold tracking-widest uppercase">
           Tactical Topic
         </p>
