@@ -1,13 +1,27 @@
 import Image from '@/components/Image'
 import Link from '@/components/Link'
+import MatchVisual from '@/components/football/MatchVisual'
 import siteMetadata from '@/data/siteMetadata'
 
+// Widened beyond slug/title/summary so the homepage Featured Analysis can pass
+// football metadata to the generated MatchVisual. app/Main.tsx already
+// provides the complete CoreContent<Blog>; non-match posts keep the exact
+// pre-existing raster image / social banner behaviour.
 interface FeaturedPost {
   slug: string
   title: string
   summary?: string
   images?: string[]
   tags?: string[]
+  category?: string
+  competition?: string
+  season?: string
+  stage?: string
+  homeTeam?: string
+  awayTeam?: string
+  score?: string
+  analysisType?: string
+  featured?: boolean
 }
 
 interface FeaturedArticleProps {
@@ -21,6 +35,9 @@ const FeaturedArticle = ({ post }: FeaturedArticleProps) => {
   const href = `/blog/${post.slug}`
   const image = post.images?.[0] || siteMetadata.socialBanner
   const badge = post.tags?.[0] || 'Analysis'
+  // Match articles (both teams present) render the website-generated match
+  // visual; everything else keeps the exact existing image behaviour.
+  const isMatchArticle = Boolean(post.homeTeam && post.awayTeam)
 
   return (
     <div id="featured-analysis" className="pb-12">
@@ -29,13 +46,30 @@ const FeaturedArticle = ({ post }: FeaturedArticleProps) => {
       </p>
       <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-sm dark:border-gray-700">
         <Link href={href} aria-label={`Read: ${post.title}`}>
-          <Image
-            alt={post.title}
-            src={image}
-            width={1200}
-            height={630}
-            className="h-56 w-full object-cover sm:h-72 md:h-96"
-          />
+          {isMatchArticle ? (
+            <div className="h-56 w-full sm:h-72 md:h-96">
+              <MatchVisual
+                homeTeam={post.homeTeam}
+                awayTeam={post.awayTeam}
+                competition={post.competition}
+                season={post.season}
+                stage={post.stage}
+                score={post.score}
+                analysisType={post.analysisType}
+                category={post.category}
+                featured={post.featured ?? false}
+                variant="featured"
+              />
+            </div>
+          ) : (
+            <Image
+              alt={post.title}
+              src={image}
+              width={1200}
+              height={630}
+              className="h-56 w-full object-cover sm:h-72 md:h-96"
+            />
+          )}
         </Link>
         <div className="p-6 sm:p-8">
           <span className="text-primary-600 dark:text-primary-400 text-xs font-semibold tracking-widest uppercase">
