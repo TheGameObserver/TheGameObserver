@@ -7,6 +7,7 @@ import Tag from '@/components/Tag'
 import PageTitle from '@/components/PageTitle'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import siteMetadata from '@/data/siteMetadata'
+import MatchVisual from '@/components/football/MatchVisual'
 
 interface ArticleHeroProps {
   content: CoreContent<Blog>
@@ -14,8 +15,32 @@ interface ArticleHeroProps {
 }
 
 const ArticleHero = ({ content, authorDetails }: ArticleHeroProps) => {
-  const { title, summary, date, tags, images, category, competition, readingTime } = content
+  const {
+    title,
+    summary,
+    date,
+    tags,
+    images,
+    category,
+    competition,
+    readingTime,
+    homeTeam,
+    awayTeam,
+    score,
+    season,
+    stage,
+    analysisType,
+    featured,
+  } = content
 
+  // Cover selection order: 1) explicit article image, 2) the existing
+  // website-generated MatchVisual for match articles (homeTeam AND awayTeam
+  // present, no explicit image), 3) generic site banner fallback. Mirrors the
+  // rule — and the featured variant — used by the homepage Featured Analysis
+  // slot, so the same article metadata renders the same MatchVisual treatment
+  // on the homepage and on the article page.
+  const hasExplicitImage = Boolean(images && images.length > 0)
+  const isMatchArticle = Boolean(homeTeam && awayTeam)
   const coverImage = images && images.length > 0 ? images[0] : siteMetadata.socialBanner
   // Category is CMS-ready via the optional `category` field. Falls back to the
   // first tag so older/undated content still shows a sensible badge.
@@ -31,13 +56,30 @@ const ArticleHero = ({ content, authorDetails }: ArticleHeroProps) => {
     <header className="pt-6 pb-8">
       <Breadcrumbs items={breadcrumbs} className="mb-6" />
       <div className="mb-8 overflow-hidden rounded-2xl">
-        <Image
-          src={coverImage}
-          alt={title}
-          width={1600}
-          height={900}
-          className="h-64 w-full object-cover sm:h-80 md:h-[28rem]"
-        />
+        {hasExplicitImage || !isMatchArticle ? (
+          <Image
+            src={coverImage}
+            alt={title}
+            width={1600}
+            height={900}
+            className="h-64 w-full object-cover sm:h-80 md:h-[28rem]"
+          />
+        ) : (
+          <div className="h-64 w-full sm:h-80 md:h-[28rem]">
+            <MatchVisual
+              homeTeam={homeTeam}
+              awayTeam={awayTeam}
+              competition={competition}
+              season={season}
+              stage={stage}
+              score={score}
+              analysisType={analysisType}
+              category={category}
+              featured={featured}
+              variant="featured"
+            />
+          </div>
+        )}
       </div>
 
       <div className="mx-auto max-w-3xl text-center">
