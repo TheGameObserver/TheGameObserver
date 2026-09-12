@@ -1,6 +1,6 @@
 import siteMetadata from '@/data/siteMetadata'
 import SocialIcon from '@/components/social-icons'
-import { Instagram, Linkedin, Mail } from '@/components/social-icons/icons'
+import { Instagram, Linkedin } from '@/components/social-icons/icons'
 
 // Official TGO contact details (see README / site contact requirements).
 const contacts = [
@@ -17,13 +17,6 @@ const contacts = [
     text: 'LinkedIn',
     external: true,
     Icon: Linkedin,
-  },
-  {
-    href: 'mailto:styris.paul0729@gmail.com',
-    label: 'Email — styris.paul0729@gmail.com',
-    text: 'styris.paul0729@gmail.com',
-    external: false,
-    Icon: Mail,
   },
 ]
 
