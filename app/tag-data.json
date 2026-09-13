@@ -1,4 +1,8 @@
 {
+  "world-cup": 2,
+  "tactics": 2,
+  "mexico": 1,
+  "south-africa": 1,
   "pressing": 1,
   "build-up": 1,
   "midfield-protection": 1,
@@ -9,8 +13,6 @@
   "transitions": 1,
   "substitutions": 1,
   "defensive-structure": 1,
-  "world-cup": 1,
-  "tactics": 1,
   "spain": 1,
   "france": 1
 }
