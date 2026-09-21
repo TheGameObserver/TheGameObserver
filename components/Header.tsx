@@ -17,7 +17,7 @@ const Header = () => {
       <Link href="/" aria-label={siteMetadata.headerTitle}>
         <div className="flex items-center">
           <Image
-            src="/images/tgo-logo-final.jpg"
+            src="/images/tgo-new-logo-minimal.jpg"
             alt="The Game Observer"
             width={132}
             height={132}
