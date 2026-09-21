@@ -7,7 +7,7 @@ import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 
 const Header = () => {
-  let headerClass = 'flex items-center w-full bg-white dark:bg-gray-950 justify-between py-6'
+  let headerClass = 'flex items-center w-full bg-white dark:bg-gray-950 justify-between py-4'
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'
   }
@@ -19,9 +19,9 @@ const Header = () => {
           <Image
             src="/images/tgo-logo-final.jpg"
             alt="The Game Observer"
-            width={96}
-            height={92}
-            className="h-20 w-[84px] object-contain sm:h-24 sm:w-[92px]"
+            width={132}
+            height={132}
+            className="h-24 w-[112px] object-contain sm:h-28 sm:w-[132px]"
           />
         </div>
       </Link>
