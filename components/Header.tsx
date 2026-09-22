@@ -17,11 +17,11 @@ const Header = () => {
       <Link href="/" aria-label={siteMetadata.headerTitle}>
         <div className="flex items-center">
           <Image
-            src="/images/tgo-new-logo-minimal.jpg"
+            src="/images/tgo-new-logo-minimal.webp"
             alt="The Game Observer"
-            width={132}
-            height={132}
-            className="h-24 w-[112px] object-contain sm:h-28 sm:w-[132px]"
+            width={180}
+            height={120}
+            className="h-20 w-[120px] object-contain sm:h-24 sm:w-[144px]"
           />
         </div>
       </Link>

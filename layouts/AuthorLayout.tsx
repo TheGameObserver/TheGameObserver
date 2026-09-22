@@ -24,10 +24,10 @@ export default function AuthorLayout({ children, content }: Props) {
             {avatar && (
               <Image
                 src={avatar}
-                alt="avatar"
-                width={192}
-                height={192}
-                className="h-48 w-48 rounded-full"
+                alt="The Game Observer"
+                width={320}
+                height={213}
+                className="h-auto w-64 object-contain"
               />
             )}
             <h3 className="pt-4 pb-2 text-2xl leading-8 font-bold tracking-tight">{name}</h3>
@@ -35,7 +35,7 @@ export default function AuthorLayout({ children, content }: Props) {
             <div className="text-gray-500 dark:text-gray-400">{company}</div>
             {(email || github || linkedin || twitter || bluesky) && (
               <div className="flex space-x-3 pt-6">
-                {email && <SocialIcon kind="mail" href={`mailto:${email}`} />}
+                {email && <SocialIcon kind="mail" href={'mailto:' + email} />}
                 {github && <SocialIcon kind="github" href={github} />}
                 {linkedin && <SocialIcon kind="linkedin" href={linkedin} />}
                 {twitter && <SocialIcon kind="x" href={twitter} />}
