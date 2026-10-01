@@ -7,9 +7,7 @@ import AnalyticsReportLayout from '@/layouts/AnalyticsReportLayout'
 import { genPageMetadata } from 'app/seo'
 
 export function generateStaticParams() {
-  return allAnalytics
-    .filter((report) => !report.draft)
-    .map((report) => ({ slug: report.slug }))
+  return allAnalytics.filter((report) => !report.draft).map((report) => ({ slug: report.slug }))
 }
 
 export async function generateMetadata(props: {
@@ -24,9 +22,7 @@ export async function generateMetadata(props: {
   })
 }
 
-export default async function AnalyticsReportPage(props: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function AnalyticsReportPage(props: { params: Promise<{ slug: string }> }) {
   const { slug } = await props.params
   const report = allAnalytics.find((item) => item.slug === slug && !item.draft)
   if (!report) notFound()
