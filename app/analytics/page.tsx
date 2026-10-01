@@ -15,13 +15,13 @@ export default function AnalyticsPage() {
 
   return (
     <SectionContainer>
-      <div className="space-y-4 pb-8 pt-8">
-        <h1 className="text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl">
+      <div className="space-y-4 pt-8 pb-8">
+        <h1 className="text-3xl tracking-tight leading-9 font-extrabold sm:text-4xl">
           TGO Analytics
         </h1>
         <p className="max-w-3xl text-lg leading-7 text-gray-600 dark:text-gray-300">
-          Data-led football reports, visualisations and research projects. Each report presents
-          its scope, evidence and limitations clearly.
+          Data-led football reports, visualisations and research projects. Each report presents its
+          scope, evidence and limitations clearly.
         </p>
       </div>
       {reports.length === 0 ? (
@@ -29,13 +29,16 @@ export default function AnalyticsPage() {
           Analytics reports will appear here as they are published.
         </p>
       ) : (
-        <div className="grid gap-6 border-t border-gray-200 py-8 dark:border-gray-700 sm:grid-cols-2">
+        <div className="grid gap-6 border-t border-gray-200 py-8 sm:grid-cols-2 dark:border-gray-700">
           {reports.map((report) => (
-            <article key={report._id} className="rounded-lg border border-gray-200 p-5 dark:border-gray-700">
-              <p className="text-xs font-semibold uppercase tracking-wide text-primary-500">
+            <article
+              key={report._id}
+              className="rounded-lg border border-gray-200 p-5 dark:border-gray-700"
+            >
+              <p className="text-primary-500 text-xs font-semibold tracking-wide uppercase">
                 {report.category}
               </p>
-              <h2 className="mt-2 text-xl font-bold leading-snug">
+              <h2 className="mt-2 text-xl leading-snug font-bold">
                 <Link href={`/analytics/${report.slug}`} className="hover:text-primary-500">
                   {report.title}
                 </Link>
@@ -44,7 +47,8 @@ export default function AnalyticsPage() {
                 {report.summary}
               </p>
               <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
-                {report.teams?.join(' · ')}{report.competition ? ` · ${report.competition}` : ''}
+                {report.teams?.join(' · ')}
+                {report.competition ? ` · ${report.competition}` : ''}
               </div>
             </article>
           ))}
