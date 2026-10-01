@@ -146,6 +146,25 @@ export const Blog = defineDocumentType(() => ({
   },
 }))
 
+export const Analytics = defineDocumentType(() => ({
+  name: 'Analytics',
+  filePathPattern: 'analytics/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    summary: { type: 'string', required: true },
+    category: { type: 'string', required: true },
+    teams: { type: 'list', of: { type: 'string' }, default: [] },
+    competition: { type: 'string' },
+    season: { type: 'string' },
+    coverImage: { type: 'string' },
+    authors: { type: 'list', of: { type: 'string' }, default: [] },
+    draft: { type: 'boolean', default: false },
+  },
+  computedFields,
+}))
+
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
@@ -168,7 +187,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors],
+  documentTypes: [Blog, Analytics, Authors],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
