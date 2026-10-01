@@ -16,7 +16,7 @@ export default function AnalyticsPage() {
   return (
     <SectionContainer>
       <div className="space-y-4 pt-8 pb-8">
-        <h1 className="text-3xl tracking-tight leading-9 font-extrabold sm:text-4xl">
+        <h1 className="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">
           TGO Analytics
         </h1>
         <p className="max-w-3xl text-lg leading-7 text-gray-600 dark:text-gray-300">
